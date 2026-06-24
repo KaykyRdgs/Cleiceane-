@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 mês de história</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- TERMINAL HACKER V2 (CINEMATOGRÁFICO) --- */
+        #hacker-layer { position:fixed; top:0; left:0; width:100%; height:100%; background:black; color:#00ff00; z-index:99999; padding:20px; font-family:'Courier New', Courier, monospace; overflow:hidden; display:flex; flex-direction:column; }
+        #terminal-output { width:100%; height:100%; overflow-y:auto; font-size:14px; text-shadow: 0 0 5px #00ff00; }
+        
+        /* --- LOGIN (MANTIDO) --- */
+        #login-layer { position:fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index:99998; display:none; align-items:center; justify-content:center; }
+        .login-box { background:#151515; padding:40px; border-radius:20px; border:1px solid #FFB6C1; width:90%; max-width:350px; text-align:center; }
+        .input-login { width:100%; padding:12px; margin:10px 0; background:#222; border:1px solid #FFB6C1; border-radius:8px; color:white; }
+        .btn-login { background:#D4AF37; color:black; padding:12px 30px; border:none; border-radius:25px; cursor:pointer; font-weight:600; width:100%; }
+
+        /* --- CSS PREMIUM E FLUIDO --- */
+        :root { --bg-color: #080808; --bg-card: #151515; --text-main: #f5f5f5; --text-muted: #a0a0a0; --accent-gold: #D4AF37; --accent-pink: #FFB6C1; }
+        
+        /* Física de Mola e Toque Responsivo */
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
+        
+        /* Cubic-Bezier Fluidity */
+        .btn, .gallery-item, .stat-card, .reveal { transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .btn:active, .gallery-item:active, .stat-card:active { transform: scale(0.97) !important; }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; text-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 80px 0; }
+        .reveal { opacity: 0; transform: translateY(40px); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .hero { height: 100vh; background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.85)), url('IMG_0992.jpeg') center/cover no-repeat; display: flex; flex-direction: column; justify-content: flex-end; text-align: center; padding-bottom: 60px; }
+        .hero h1 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 5px; }
+        .hero h3 { font-size: 1.1rem; color: var(--accent-pink); font-family: 'Poppins', sans-serif; font-weight: 400; letter-spacing: 2px; margin-bottom: 8px; }
+        .hero .contador { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; }
+        .hero p { font-size: 0.95rem; color: var(--text-main); line-height: 1.7; margin-bottom: 40px; padding: 0 20px; font-weight: 300; }
+        
+        .btn { display: inline-block; background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(5px); color: var(--text-main); border: 1px solid var(--accent-gold); padding: 12px 35px; border-radius: 30px; font-size: 1rem; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+        .btn:hover { background: var(--accent-gold); color: var(--bg-color); transform: translateY(-3px); }
+        
+        .gallery-item { margin-bottom: 40px; background: var(--bg-card); border-radius: 16px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255, 255, 255, 0.03); }
+        .gallery-item img { width: 100%; display: block; object-fit: cover; }
+        .gallery-caption { padding: 20px; text-align: center; font-size: 0.95rem; font-style: italic; color: var(--text-muted); background: var(--bg-card); }
+        
+        .learnings-list { list-style: none; }
+        .learnings-list li { background: var(--bg-card); margin-bottom: 15px; padding: 20px; border-radius: 12px; display: flex; align-items: center; border-left: 3px solid var(--accent-pink); }
+        .learnings-list li:hover { transform: translateX(5px); }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: var(--bg-card); padding: 25px 15px; border-radius: 16px; text-align: center; border: 1px solid rgba(212, 175, 55, 0.1); }
+        .stat-value { font-size: 1.8rem; color: var(--accent-gold); font-family: 'Playfair Display', serif; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+
+        /* Easter Egg & Modal */
+        .easter-egg-btn { position: fixed; bottom: 20px; right: 20px; background: var(--bg-card); border: 1px solid rgba(255, 182, 193, 0.3); border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 100; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px); z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: var(--bg-card); width: 90%; max-width: 350px; border-radius: 20px; padding: 30px 20px; text-align: center; border: 1px solid rgba(255, 182, 193, 0.2); }
+        .loader { border: 3px solid rgba(255,255,255,0.05); border-top: 3px solid var(--accent-pink); border-radius: 50%; width: 35px; height: 35px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .progress-bar { width: 0%; height: 8px; background-color: var(--accent-pink); border-radius: 10px; transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    </style>
+</head>
+<body>
+
+    <div id="hacker-layer"><div id="terminal-output"></div></div>
+    
+    <div id="login-layer">
+        <div class="login-box">
+            <h2 style="color:var(--accent-pink); margin-bottom:20px;">Verificação 🔐</h2>
+            <input type="text" id="login-nome" placeholder="Seu nome" class="input-login">
+            <input type="date" id="login-data" class="input-login">
+            <button id="btn-login" class="btn-login">Acessar</button>
+            <p id="erro-msg" style="color:red; margin-top:10px; display:none;">Dados incorretos!</p>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="container reveal">
+            <h1>1 mês de história<br>(até agora)</h1>
+            <h3>24 de maio &rarr; 24 de junho</h3>
+            <div class="contador">Há 1 mês criando histórias</div>
+            <p>Ainda não faz tanto tempo assim. Mas já foi suficiente para render boas histórias, fotos aleatórias, risadas inesperadas e uma quantidade absurda de doces consumidos.<br><br>Então resolvi guardar alguns momentos aqui.</p>
+            <a href="#galeria" class="btn" id="btn-entrar">Entrar</a>
+        </div>
+    </header>
+
+    <section id="galeria" class="container">
+        <h2 class="section-title reveal">Registros</h2>
+        <div class="gallery-item reveal"><img src="IMG_0671_Original.jpeg" loading="lazy" alt="Foto 1"><div class="gallery-caption">"Onde algumas histórias começaram."</div></div>
+        <div class="gallery-item reveal"><img src="IMG_0986.jpeg" loading="lazy" alt="Foto 2"><div class="gallery-caption">"Evidências do caos."</div></div>
+        <div class="gallery-item reveal"><img src="IMG_0984.jpeg" loading="lazy" alt="Foto 3"><div class="gallery-caption">"Minha foto favorita até agora."</div></div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title reveal">Coisas que aprendi sobre você</h2>
+        <ul class="learnings-list reveal">
+            <li><span>✅</span> Gosta de doce em níveis preocupantes</li>
+            <li><span>✅</span> Consegue ficar bonita até nas fotos mais aleatórias</li>
+            <li><span>✅</span> Tem talento para virar figurinha</li>
+            <li><span>✅</span> Faz qualquer rolê ficar mais divertido</li>
+            <li><span>✅</span> Ainda estou descobrindo o resto...</li>
+        </ul>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title reveal">Estatísticas oficiais</h2>
+        <div class="stats-grid reveal">
+            <div class="stat-card"><div class="stat-value">1 mês</div><div class="stat-label">Tempo de história</div></div>
+            <div class="stat-card"><div class="stat-value">&infin;</div><div class="stat-label">Doces consumidos</div></div>
+            <div class="stat-card"><div class="stat-value">Muitas</div><div class="stat-label">Fotos aleatórias</div></div>
+            <div class="stat-card"><div class="stat-value">&infin;</div><div class="stat-label">Momentos legais</div></div>
+        </div>
+    </section>
+
+    <div class="easter-egg-btn" id="btn-easter-egg">🍭</div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div id="modal-loading"><p>Analisando sistema...</p><div class="loader"></div></div>
+            <div id="modal-result" style="display:none;">
+                <h3>Identidade Confirmada ✅</h3>
+                <div class="progress-bar" id="barra-doce"></div>
+                <button class="btn" id="btn-aceitar" style="margin-top:20px;">Aceitar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TERMINAL HACKER V2
+        const out = document.getElementById('terminal-output');
+        const msgs = ["Iniciando conexão remota...", "Rastreando diretório...", "Bypassing firewall...", "Acesso autorizado: CLEICEANE", "System ready."];
+        let line = 0;
+        function show() {
+            if(line < msgs.length) {
+                const p = document.createElement('p');
+                p.textContent = "> " + msgs[line];
+                out.appendChild(p);
+                line++;
+                setTimeout(show, 700);
+            } else {
+                setTimeout(() => { document.getElementById('hacker-layer').style.display = 'none'; document.getElementById('login-layer').style.display = 'flex'; }, 800);
+            }
+        }
+        show();
+
+        // Login
+        document.getElementById('btn-login').onclick = () => {
+            if (document.getElementById('login-nome').value.toLowerCase().includes('cleice') && document.getElementById('login-data').value === '2026-05-24') {
+                document.getElementById('login-layer').style.display = 'none';
+            } else { document.getElementById('erro-msg').style.display = 'block'; }
+        };
+
+        // Scroll e Reveal
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        });
+
+        // Easter Egg
+        document.getElementById('btn-easter-egg').onclick = () => {
+            document.getElementById('modal').classList.add('active');
+            setTimeout(() => { 
+                document.getElementById('modal-loading').style.display = 'none';
+                document.getElementById('modal-result').style.display = 'block';
+                document.getElementById('barra-doce').style.width = '100%';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
